@@ -2,3 +2,13 @@
 Repositorio para guardar todos los trabajos y proyectos de la materia de programación
 
 Hola, este es mi pimer commit de mi repo en clase de programación!!!⚛
+
+Hola, este es el commit de la adición de la tarea "Classwork #07 - Git/Github Repo", añadiendo los siguientes cambios y adiciones:
+-Actualización en el README.md
+-Adición del programa "CALCULADOR DE DÍGITO VERIFICADOR UTFSM" en el archivo "hw#7"
+
+Hola, este es el commit de la adición de la tarea "Classwork #08 - Numerical Integration", añadiendo los siguientes archivos para el assignment:
+-Hw#8.png (FlowChart)
+-Hw#8.txt (Pseudocode on PSeInt)
+-Hw#8.py (python)
+Declaración de IA: No se usó la IA en este entregable dado lo enseñado en clase y aportaciones grupales post clase.
