@@ -1,0 +1,87 @@
+Algoritmo IntegralCalculator
+
+    Definir a, b, f_x, method Como Cadena
+    Definir n, i, shift, variable Como Entero
+    Definir h, area, constant, xi Como Real
+    Definir f_0, f_xi, height, entrada Como Cadena
+
+    // Input
+    Escribir "Write the left endpoint of the interval:"
+    Leer a
+
+    Escribir "Write the right endpoint of the interval:"
+    Leer b
+
+    Escribir "Write the function to integrate:"
+    Leer f_x
+
+    Escribir "Write the integration method (LRM/RRM/MRM/TRAP)"
+    Leer method
+
+    // Process
+
+    // PSeInt no puede evaluar expresiones como Python,
+    // así que debes convertir manualmente los extremos.
+    Si a = "pi" Entonces
+        a_num <- PI
+    Sino
+        a_num <- ConvertirANumero(a)
+    FinSi
+
+    Si b = "pi" Entonces
+        b_num <- PI
+    Sino
+        b_num <- ConvertirANumero(b)
+    FinSi
+
+    n <- 1000
+    h <- (b_num - a_num) / n
+    area <- 0
+    constant <- 0
+    shift <- 0
+    variable <- 0
+
+    Si method = "RRM" Entonces
+        shift <- 1
+    FinSi
+
+    Si method = "MRM" Entonces
+        constant <- h / 2
+    FinSi
+
+    Si method = "TRAP" Entonces
+
+        variable <- 1
+
+        // Aquí debes calcular f(a)
+        // PSeInt no puede hacer eval()
+        // Tendrías que programar la función manualmente
+
+        Para i <- variable Hasta n - 1 Hacer
+
+            xi <- a_num + i * h
+
+            // Calcular f(xi) aquí
+            // area <- area + (h / 2) * 2 * f(xi)
+
+        FinPara
+
+        // Calcular f(b) aquí
+
+    Sino
+
+        Para i <- shift Hasta n + shift - 1 Hacer
+
+            xi <- a_num + i * h
+
+            // Calcular f(xi + constant) aquí
+            // area <- area + h * f(xi + constant)
+
+        FinPara
+
+    FinSi
+
+    // Output
+    Escribir "The integration of the function is: ", area
+
+FinAlgoritmo
