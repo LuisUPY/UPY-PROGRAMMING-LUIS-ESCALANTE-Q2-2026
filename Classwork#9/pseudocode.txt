@@ -1,0 +1,56 @@
+Algoritmo ConjugadorVerbos
+    Dimension pronombres[6]
+    Dimension terminaciones_ar[6]
+    Dimension terminaciones_er[6]
+    Dimension terminaciones_ir[6]
+    Definir verbo, radical, terminacion, conjugacion Como Cadena
+    Definir indice, tam Como Entero
+	
+    pronombres[1] <- "yo"
+    pronombres[2] <- "tu"
+    pronombres[3] <- "el"
+    pronombres[4] <- "nosotros"
+    pronombres[5] <- "ustedes"
+    pronombres[6] <- "ellos"
+	
+    terminaciones_ar[1] <- "o"
+    terminaciones_ar[2] <- "as"
+    terminaciones_ar[3] <- "a"
+    terminaciones_ar[4] <- "amos"
+    terminaciones_ar[5] <- "an"
+    terminaciones_ar[6] <- "an"
+	
+    terminaciones_er[1] <- "o"
+    terminaciones_er[2] <- "es"
+    terminaciones_er[3] <- "e"
+    terminaciones_er[4] <- "emos"
+    terminaciones_er[5] <- "en"
+    terminaciones_er[6] <- "en"
+	
+    terminaciones_ir[1] <- "o"
+    terminaciones_ir[2] <- "es"
+    terminaciones_ir[3] <- "e"
+    terminaciones_ir[4] <- "imos"
+    terminaciones_ir[5] <- "en"
+    terminaciones_ir[6] <- "en"
+	
+    Escribir "Ingresa el verbo: " Sin Saltar
+    Leer verbo
+	
+    tam <- Longitud(verbo)
+    radical <- SubCadena(verbo, 1, tam - 2)
+    terminacion <- SubCadena(verbo, tam - 1, tam)
+	
+    Para indice <- 1 Hasta 6 Con Paso 1 Hacer
+        Si terminacion = "ar" Entonces
+            conjugacion <- Concatenar(radical, terminaciones_ar[indice])
+        Sino
+            Si terminacion = "er" Entonces
+                conjugacion <- Concatenar(radical, terminaciones_er[indice])
+            Sino
+                conjugacion <- Concatenar(radical, terminaciones_ir[indice])
+            FinSi
+        FinSi
+        Escribir pronombres[indice], " ", conjugacion
+    FinPara
+FinAlgoritmo
