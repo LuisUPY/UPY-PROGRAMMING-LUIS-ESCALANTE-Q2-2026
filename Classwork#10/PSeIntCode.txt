@@ -1,0 +1,204 @@
+Algoritmo SistemaEscolar
+    // Definir e inicializar arreglos paralelos para usuarios
+    Definir users_id, users_pass, users_role, users_name Como Cadena
+    Dimension users_id[8], users_pass[8], users_role[8], users_name[8]
+    
+    users_id[1] <- 'adardon'; users_pass[1] <- '1234'; users_role[1] <- 'student'; users_name[1] <- 'Arcadio Dardon'
+    users_id[2] <- 'irivas'; users_pass[2] <- '1234'; users_role[2] <- 'student'; users_name[2] <- 'Ivan Rivas'
+    users_id[3] <- 'kpool'; users_pass[3] <- '1234'; users_role[3] <- 'student'; users_name[3] <- 'Keyra Pool'
+    users_id[4] <- 'ccalderon'; users_pass[4] <- '1234'; users_role[4] <- 'student'; users_name[4] <- 'Clarisa Calderon'
+    users_id[5] <- 'lescalante'; users_pass[5] <- '1234'; users_role[5] <- 'student'; users_name[5] <- 'Luis Escalante'
+    users_id[6] <- 'ahernandez'; users_pass[6] <- '1234'; users_role[6] <- 'student'; users_name[6] <- 'Alejandro Hernandez'
+    users_id[7] <- 'jpedrozo'; users_pass[7] <- '1234'; users_role[7] <- 'teacher'; users_name[7] <- 'Jorge Pedrozo'
+    users_id[8] <- 'dgamboa'; users_pass[8] <- '1234'; users_role[8] <- 'coordinator'; users_name[8] <- 'Didier Gamboa'
+
+    // Definir arreglo para materias
+    Definir subjects Como Cadena
+    Dimension subjects[8]
+    subjects[1] <- 'Prob&Stats'; subjects[2] <- 'Comp&Serv Arch'; subjects[3] <- 'Tutoring'; subjects[4] <- 'DifCalculus'
+    subjects[5] <- 'Programming'; subjects[6] <- 'Dicrete Math'; subjects[7] <- 'SocialE Skills'; subjects[8] <- 'English'
+
+    // Definir matriz de calificaciones (Filas: Estudiantes 1-6, Columnas: Materias 1-8)
+    Definir grades Como Real
+    Dimension grades[6, 8]
+    // adardon
+    grades[1,1]<-8.0; grades[1,2]<-7.0; grades[1,3]<-9.0; grades[1,4]<-8.0; grades[1,5]<-8.5; grades[1,6]<-9.5; grades[1,7]<-10.0; grades[1,8]<-9.5
+    // irivas
+    grades[2,1]<-8.5; grades[2,2]<-8.5; grades[2,3]<-8.0; grades[2,4]<-8.0; grades[2,5]<-9.5; grades[2,6]<-8.0; grades[2,7]<-8.5; grades[2,8]<-8.5
+    // kpool
+    grades[3,1]<-7.5; grades[3,2]<-8.0; grades[3,3]<-9.5; grades[3,4]<-9.0; grades[3,5]<-10.0; grades[3,6]<-9.0; grades[3,7]<-9.0; grades[3,8]<-8.0
+    // ccalderon
+    grades[4,1]<-8.0; grades[4,2]<-9.0; grades[4,3]<-9.5; grades[4,4]<-8.0; grades[4,5]<-9.0; grades[4,6]<-8.5; grades[4,7]<-8.0; grades[4,8]<-9.5
+    // lescalante
+    grades[5,1]<-8.5; grades[5,2]<-9.0; grades[5,3]<-8.0; grades[5,4]<-8.5; grades[5,5]<-10.0; grades[5,6]<-9.5; grades[5,7]<-8.0; grades[5,8]<-7.5
+    // ahernandez
+    grades[6,1]<-8.0; grades[6,2]<-10.0; grades[6,3]<-10.0; grades[6,4]<-8.0; grades[6,5]<-8.5; grades[6,6]<-9.0; grades[6,7]<-10.0; grades[6,8]<-9.5
+
+    // PROCESS - Autenticación
+    Definir access_granted Como Logico
+    Definir current_user_idx, i, j Como Entero
+    Definir input_user, input_pass Como Cadena
+    
+    access_granted <- Falso
+    current_user_idx <- 0
+
+    Mientras No access_granted Hacer
+        Escribir 'Username: ' Sin Saltar
+        Leer input_user
+        Escribir 'Password: ' Sin Saltar
+        Leer input_pass
+
+        Para i <- 1 Hasta 8 Hacer
+            Si users_id[i] == input_user Y users_pass[i] == input_pass Entonces
+                access_granted <- Verdadero
+                current_user_idx <- i
+            FinSi
+        FinPara
+
+        Si No access_granted Entonces
+            Escribir 'Invalid username or password. Please try again.'
+            Escribir ''
+        FinSi
+    FinMientras
+
+    Definir current_name, current_role Como Cadena
+    current_name <- users_name[current_user_idx]
+    current_role <- users_role[current_user_idx]
+
+    // OUTPUT - Bienvenida
+    Escribir ''
+    Escribir 'Welcome, ', current_name, ' (', current_role, ')'
+    Escribir '========================================'
+
+    // Lógica principal basada en roles
+    Si current_role == 'student' Entonces
+        Escribir 'Report Card for ', current_name
+        Escribir '----------------------------------------'
+        
+        Definir str_passed, str_pending Como Cadena
+        str_passed <- ''
+        str_pending <- ''
+
+        Para j <- 1 Hasta 8 Hacer
+            Escribir subjects[j], ': ', grades[current_user_idx, j]
+            Si grades[current_user_idx, j] >= 8.0 Entonces
+                str_passed <- str_passed + subjects[j] + '  '
+            Sino
+                str_pending <- str_pending + subjects[j] + '  '
+            FinSi
+        FinPara
+
+        Escribir ''
+        Escribir 'Passed subjects: [ ', str_passed, ']'
+        Escribir 'Pending subjects: [ ', str_pending, ']'
+
+    Sino
+        Si current_role == 'teacher' Entonces
+            Escribir 'Student List:'
+            Escribir '----------------------------------------'
+            Para i <- 1 Hasta 6 Hacer
+                Escribir users_id[i], ' | ', users_name[i]
+            FinPara
+
+            Definir continue_grading Como Logico
+            Definir student_input, subject_input, confirmation Como Cadena
+            Definir new_grade Como Real
+            Definir s_idx, sub_idx Como Entero
+            
+            continue_grading <- Verdadero
+
+            Mientras continue_grading Hacer
+                Escribir ''
+                Escribir 'Student username (or type "Exit" to quit): ' Sin Saltar
+                Leer student_input
+
+                Si student_input == 'Exit' O student_input == 'exit' Entonces
+                    continue_grading <- Falso
+                Sino
+                    s_idx <- 0
+                    Para i <- 1 Hasta 6 Hacer
+                        Si users_id[i] == student_input Entonces
+                            s_idx <- i
+                        FinSi
+                    FinPara
+
+                    Si s_idx > 0 Entonces
+                        Escribir 'Subject: ' Sin Saltar
+                        Leer subject_input
+
+                        sub_idx <- 0
+                        Para j <- 1 Hasta 8 Hacer
+                            Si subjects[j] == subject_input Entonces
+                                sub_idx <- j
+                            FinSi
+                        FinPara
+
+                        Si sub_idx > 0 Entonces
+                            Escribir 'Current grade: ', grades[s_idx, sub_idx]
+                            Escribir 'New grade: ' Sin Saltar
+                            Leer new_grade
+                            Escribir 'Confirm change? (yes/no): ' Sin Saltar
+                            Leer confirmation
+
+                            Si confirmation == 'yes' O confirmation == 'Yes' Entonces
+                                grades[s_idx, sub_idx] <- new_grade
+                                Escribir 'Grade updated.'
+                            Sino
+                                Escribir 'Change canceled.'
+                            FinSi
+                        Sino
+                            Escribir 'Invalid subject.'
+                        FinSi
+                    Sino
+                        Escribir 'Student not found.'
+                    FinSi
+                FinSi
+            FinMientras
+
+        Sino
+            Si current_role == 'coordinator' Entonces
+                Escribir 'Teacher List:'
+                Escribir '----------------------------------------'
+                Para i <- 1 Hasta 8 Hacer
+                    Si users_role[i] == 'teacher' Entonces
+                        Escribir users_id[i], ' | ', users_name[i]
+                    FinSi
+                FinPara
+
+                Escribir ''
+                Escribir 'Subject List:'
+                Escribir '----------------------------------------'
+                Para j <- 1 Hasta 8 Hacer
+                    Escribir subjects[j]
+                FinPara
+
+                Escribir ''
+                Escribir 'Student List with Grades:'
+                Escribir '----------------------------------------------------------------------------------------------------'
+                
+                Definir header, row, str_grade Como Cadena
+                header <- 'Subject        | '
+                Para i <- 1 Hasta 6 Hacer
+                    header <- header + users_name[i] + ' | '
+                FinPara
+                Escribir header
+                Escribir '----------------------------------------------------------------------------------------------------'
+
+                Para j <- 1 Hasta 8 Hacer
+                    row <- subjects[j] + ' | '
+                    Para i <- 1 Hasta 6 Hacer
+                        Si grades[i, j] < 8.0 Entonces
+                            str_grade <- ConvertirATexto(grades[i, j]) + ' (F)'
+                        Sino
+                            str_grade <- ConvertirATexto(grades[i, j]) + '    '
+                        FinSi
+                        row <- row + str_grade + ' | '
+                    FinPara
+                    Escribir row
+                FinPara
+            Sino
+                Escribir 'Access type not recognized.'
+            FinSi
+        FinSi
+    FinSi
+FinAlgoritmo

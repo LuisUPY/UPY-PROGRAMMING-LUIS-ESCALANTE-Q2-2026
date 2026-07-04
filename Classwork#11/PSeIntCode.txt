@@ -1,0 +1,57 @@
+Algoritmo GenerarFractalCSV
+    // 1. SIMULACIÓN DEL DICCIONARIO (CONFIG.TXT)
+    // Definimos las variables que tu código Python extraía del archivo
+    Definir ancho, alto, max_iter Como Entero
+    Definir real_min, real_max, imag_min, imag_max Como Real
+    
+    // Aquí pon los valores que tendrías en tu config.txt
+    ancho <- 100
+    alto <- 100
+    max_iter <- 50
+    real_min <- -2.0
+    real_max <- 1.0
+    imag_min <- -1.5
+    imag_max <- 1.5
+    
+    // Variables para los ciclos y matemáticas
+    Definir fila, columna, iteraciones Como Entero
+    Definir c_re, c_im, z_re, z_im, temp_z_re Como Real
+    
+    // 2. ENCABEZADO DEL CSV
+    Escribir "fila, columna, iteraciones"
+    
+    // 3. CICLOS PRINCIPALES
+    Para fila <- 0 Hasta alto - 1 Hacer
+        Para columna <- 0 Hasta ancho - 1 Hacer
+            
+            // Mapeo a coordenadas complejas
+            c_re <- real_min + (columna / ancho) * (real_max - real_min)
+            c_im <- imag_min + (fila / alto) * (imag_max - imag_min)
+            
+            // Equivalente a z = 0 + 0j
+            z_re <- 0.0
+            z_im <- 0.0
+            iteraciones <- 0
+            
+            // Equivalente a while (abs(z) <= 2) and (iteraciones < max_iter)
+            // (z_re * z_re + z_im * z_im) <= 4 es matemáticamente lo mismo que abs(z) <= 2
+            Mientras ((z_re * z_re) + (z_im * z_im) <= 4) Y (iteraciones < max_iter) Hacer
+                
+                // Equivalente a z = z * z + c
+                // Calculamos la parte real temporalmente para no alterar z_im antes de tiempo
+                temp_z_re <- (z_re * z_re) - (z_im * z_im) + c_re
+                
+                z_im <- (2 * z_re * z_im) + c_im
+                z_re <- temp_z_re
+                
+                iteraciones <- iteraciones + 1
+            FinMientras
+            
+            // Imprimir línea formato CSV
+            Escribir fila, ",", columna, ",", iteraciones
+            
+        FinPara
+    FinPara
+    
+    Escribir "DONE"
+FinAlgoritmo
