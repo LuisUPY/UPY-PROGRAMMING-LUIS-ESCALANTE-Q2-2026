@@ -1,0 +1,192 @@
+Algoritmo SortingAlgorithms
+
+    Definir arr, arr_copia Como Lista de Enteros
+    Definir algoritmo Como Cadena
+    Definir n, i, j, pass_num, min_idx, key Como Entero
+    Definir swapped Como Logico
+
+    // ============================================================
+    // BUBBLE SORT
+    // ============================================================
+    // Core rule: compare neighboring elements; swap if out of order.
+    // Each full sweep is one pass. After pass k, the last k elements
+    // are in their final position.
+
+    Procedimiento bubble_sort(arr)
+        n <- Longitud(arr)
+        Para pass_num <- 0 Hasta n - 2 Hacer
+            swapped <- Falso
+            Para i <- 0 Hasta n - 2 - pass_num Hacer
+                Si arr[i] > arr[i + 1] Entonces
+                    Intercambiar(arr[i], arr[i + 1])
+                    swapped <- Verdadero
+                FinSi
+            FinPara
+            Si swapped = Falso Entonces
+                Romper
+            FinSi
+        FinPara
+    FinProcedimiento
+
+  // ============================================================
+  // INSERTION SORT
+  // ============================================================
+  // Build a sorted prefix one element at a time by inserting each
+  // new value into its correct position among earlier values.
+
+    Procedimiento insertion_sort(arr)
+        n <- Longitud(arr)
+        Para i <- 1 Hasta n - 1 Hacer
+            key <- arr[i]
+            j <- i - 1
+            Mientras j >= 0 Y arr[j] > key Hacer
+                arr[j + 1] <- arr[j]
+                j <- j - 1
+            FinMientras
+            arr[j + 1] <- key
+        FinPara
+    FinProcedimiento
+
+    // ============================================================
+    // SELECTION SORT
+    // ============================================================
+    // Repeatedly find the smallest unsorted element and swap it
+    // into the next available position.
+
+    Procedimiento selection_sort(arr)
+        n <- Longitud(arr)
+        Para i <- 0 Hasta n - 2 Hacer
+            min_idx <- i
+            Para j <- i + 1 Hasta n - 1 Hacer
+                Si arr[j] < arr[min_idx] Entonces
+                    min_idx <- j
+                FinSi
+            FinPara
+            Si min_idx <> i Entonces
+                Intercambiar(arr[i], arr[min_idx])
+            FinSi
+        FinPara
+    FinProcedimiento
+
+    // ============================================================
+    // VISUALIZATION SUPPORT
+    // ============================================================
+
+    Procedimiento draw_bars(arr, highlight, finalized)
+        Limpiar lienzo
+        n <- Longitud(arr)
+        max_val <- ValorMaximo(arr)
+        bar_width <- 1.0 / n
+        Para i <- 0 Hasta n - 1 Hacer
+            x <- i * bar_width
+            height <- arr[i] / max_val
+            Si i esta en highlight Entonces
+                Color <- ROJO
+            Sino Si i esta en finalized Entonces
+                Color <- VERDE
+            Sino
+                Color <- AZUL
+            FinSi
+            DibujarRectanguloRelleno(x, 0, bar_width * 0.9, height)
+        FinPara
+        Mostrar lienzo por 300 milisegundos
+    FinProcedimiento
+
+    // Animated versions call the same logic as above, but redraw the
+    // bars after every comparison or swap.
+
+    Procedimiento bubble_sort_animated(arr)
+        n <- Longitud(arr)
+        Para pass_num <- 0 Hasta n - 2 Hacer
+            swapped <- Falso
+            Para i <- 0 Hasta n - 2 - pass_num Hacer
+                Dibujar barras resaltando i e i + 1
+                Si arr[i] > arr[i + 1] Entonces
+                    Intercambiar(arr[i], arr[i + 1])
+                    swapped <- Verdadero
+                    Dibujar barras despues del intercambio
+                FinSi
+            FinPara
+            Si swapped = Falso Entonces
+                Romper
+            FinSi
+        FinPara
+        Dibujar barras finales
+    FinProcedimiento
+
+    Procedimiento insertion_sort_animated(arr)
+        n <- Longitud(arr)
+        Para i <- 1 Hasta n - 1 Hacer
+            key <- arr[i]
+            j <- i - 1
+            Dibujar barras resaltando i
+            Mientras j >= 0 Y arr[j] > key Hacer
+                Dibujar barras resaltando j y j + 1
+                arr[j + 1] <- arr[j]
+                j <- j - 1
+            FinMientras
+            arr[j + 1] <- key
+            Dibujar barras despues de insertar key
+        FinPara
+        Dibujar barras finales
+    FinProcedimiento
+
+    Procedimiento selection_sort_animated(arr)
+        n <- Longitud(arr)
+        Para i <- 0 Hasta n - 2 Hacer
+            min_idx <- i
+            Para j <- i + 1 Hasta n - 1 Hacer
+                Dibujar barras resaltando j y min_idx
+                Si arr[j] < arr[min_idx] Entonces
+                    min_idx <- j
+                FinSi
+            FinPara
+            Si min_idx <> i Entonces
+                Intercambiar(arr[i], arr[min_idx])
+                Dibujar barras despues del intercambio
+            FinSi
+        FinPara
+        Dibujar barras finales
+    FinProcedimiento
+
+    // ============================================================
+    // MAIN PROGRAM
+    // ============================================================
+
+    // INPUT
+    Escribir "Enter numbers separated by spaces:"
+    Leer entrada
+    Convertir entrada en arr
+
+    Escribir "Choose algorithm (bubble / insertion / selection):"
+    Leer algoritmo
+
+    Escribir "Show animation? (yes / no):"
+    Leer animacion
+
+    // PROCESS
+    arr_copia <- Copiar(arr)
+
+    Si animacion = "yes" Entonces
+        Si algoritmo = "bubble" Entonces
+            bubble_sort_animated(arr_copia)
+        Sino Si algoritmo = "insertion" Entonces
+            insertion_sort_animated(arr_copia)
+        Sino
+            selection_sort_animated(arr_copia)
+        FinSi
+    Sino
+        Si algoritmo = "bubble" Entonces
+            bubble_sort(arr_copia)
+        Sino Si algoritmo = "insertion" Entonces
+            insertion_sort(arr_copia)
+        Sino
+            selection_sort(arr_copia)
+        FinSi
+    FinSi
+
+    // OUTPUT
+    Escribir "Original array:", arr
+    Escribir "Sorted array:", arr_copia
+
+FinAlgoritmo
