@@ -12,3 +12,11 @@ Hola, este es el commit de la adición de la tarea "Classwork #08 - Numerical In
 -Hw#8.txt (Pseudocode on PSeInt)
 -Hw#8.py (python)
 Declaración de IA: No se usó la IA en este entregable dado lo enseñado en clase y aportaciones grupales post clase.
+
+## Classwork 13 - Error Handling
+Versiones con manejo de errores de Classwork #07, #08 y #09.
+Declaración de IA: Se usó IA como apoyo para estructurar excepciones y validaciones.
+
+## Classwork 14 - Error Handling 2
+Versiones con manejo de errores de Classwork #10, #11 y #12.
+Declaración de IA: Se usó IA como apoyo para estructurar excepciones y validaciones.
