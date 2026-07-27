@@ -1,0 +1,205 @@
+{
+ "l1_only": {
+  "n_attacks": 35,
+  "n_benign": 44,
+  "recall_flag": 0.8,
+  "recall_block": 0.8,
+  "fp_flag": 0.0,
+  "fp_block": 0.0,
+  "precision_flag": 1.0,
+  "precision_block": 1.0,
+  "median_first_flag_turn_multiturn": 3.5,
+  "factor_attribution_at_flag": {
+   "l1_high": 1.0
+  },
+  "by_category": {
+   "benign_support": {
+    "n_attacks": 0,
+    "recall_flag": null,
+    "recall_block": null,
+    "n_benign": 44,
+    "fp_flag": 0.0
+   },
+   "crescendo": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "direct_probe": {
+    "n_attacks": 32,
+    "recall_flag": 0.7812,
+    "recall_block": 0.7812,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "jailbreak": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "salami": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   }
+  },
+  "by_source": {
+   "legacy": {
+    "n_attacks": 32,
+    "recall_flag": 0.7812,
+    "recall_block": 0.7812,
+    "n_benign": 42,
+    "fp_flag": 0.0
+   },
+   "legacy_playbook": {
+    "n_attacks": 3,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 2,
+    "fp_flag": 0.0
+   }
+  }
+ },
+ "l2_only": {
+  "n_attacks": 35,
+  "n_benign": 44,
+  "recall_flag": 0.0,
+  "recall_block": 0.0,
+  "fp_flag": 0.0,
+  "fp_block": 0.0,
+  "precision_flag": null,
+  "precision_block": null,
+  "median_first_flag_turn_multiturn": null,
+  "factor_attribution_at_flag": {},
+  "by_category": {
+   "benign_support": {
+    "n_attacks": 0,
+    "recall_flag": null,
+    "recall_block": null,
+    "n_benign": 44,
+    "fp_flag": 0.0
+   },
+   "crescendo": {
+    "n_attacks": 1,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "direct_probe": {
+    "n_attacks": 32,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "jailbreak": {
+    "n_attacks": 1,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "salami": {
+    "n_attacks": 1,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 0,
+    "fp_flag": null
+   }
+  },
+  "by_source": {
+   "legacy": {
+    "n_attacks": 32,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 42,
+    "fp_flag": 0.0
+   },
+   "legacy_playbook": {
+    "n_attacks": 3,
+    "recall_flag": 0.0,
+    "recall_block": 0.0,
+    "n_benign": 2,
+    "fp_flag": 0.0
+   }
+  }
+ },
+ "l1_l2": {
+  "n_attacks": 35,
+  "n_benign": 44,
+  "recall_flag": 0.8286,
+  "recall_block": 0.8,
+  "fp_flag": 0.0,
+  "fp_block": 0.0,
+  "precision_flag": 1.0,
+  "precision_block": 1.0,
+  "median_first_flag_turn_multiturn": 3.5,
+  "factor_attribution_at_flag": {
+   "l1_high": 0.9655,
+   "trajectory_high": 0.8966,
+   "proximity_high": 0.7241,
+   "escalation": 0.069,
+   "l1_medium": 0.0345
+  },
+  "by_category": {
+   "benign_support": {
+    "n_attacks": 0,
+    "recall_flag": null,
+    "recall_block": null,
+    "n_benign": 44,
+    "fp_flag": 0.0
+   },
+   "crescendo": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "direct_probe": {
+    "n_attacks": 32,
+    "recall_flag": 0.8125,
+    "recall_block": 0.7812,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "jailbreak": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   },
+   "salami": {
+    "n_attacks": 1,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 0,
+    "fp_flag": null
+   }
+  },
+  "by_source": {
+   "legacy": {
+    "n_attacks": 32,
+    "recall_flag": 0.8125,
+    "recall_block": 0.7812,
+    "n_benign": 42,
+    "fp_flag": 0.0
+   },
+   "legacy_playbook": {
+    "n_attacks": 3,
+    "recall_flag": 1.0,
+    "recall_block": 1.0,
+    "n_benign": 2,
+    "fp_flag": 0.0
+   }
+  }
+ }
+}
