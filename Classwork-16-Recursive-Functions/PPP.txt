@@ -1,0 +1,133 @@
+PPP - Pseudocode Programming Process
+Recursive Functions
+1. recursiva(n)
+BEGIN recursiva(n)
+    TRY
+        IF n < 0 THEN
+            RETURN "Error: n cannot be negative"
+        END IF
+        IF n == 0 THEN
+            RETURN "Done!"                      // base case
+        END IF
+        PRINT n
+        RETURN recursiva(n - 1)                 // recursive case
+    CATCH TypeError
+        RETURN "Error: n must be a number"
+    END TRY
+END recursiva
+2. fibonacci(n)
+BEGIN fibonacci(n)
+    TRY
+        IF n < 0 THEN
+            RETURN "Error: n cannot be negative"
+        ELSE IF n == 0 OR n == 1 THEN
+            RETURN n                            // base case
+        END IF
+        previous = fibonacci(n - 1)             // recursive call 1
+        before_that = fibonacci(n - 2)          // recursive call 2
+        RETURN previous + before_that
+    CATCH TypeError
+        RETURN "Error: n must be a number"
+    END TRY
+END fibonacci
+3. factorial(n)
+BEGIN factorial(n)
+    TRY
+        IF n < 0 THEN
+            RETURN "Error: n cannot be negative"
+        END IF
+        IF n <= 1 THEN
+            RETURN 1                            // base case
+        END IF
+        RETURN n * factorial(n - 1)             // recursive case
+    CATCH TypeError
+        RETURN "Error: n must be a number"
+    END TRY
+END factorial
+4. multiplicacion_recursiva(n, m)
+BEGIN multiplicacion_recursiva(n, m)
+    TRY
+        IF m < 0 THEN
+            RETURN "Error: m cannot be negative"
+        END IF
+        IF m == 0 THEN
+            RETURN 0                            // base case
+        END IF
+        partial = multiplicacion_recursiva(n, m - 1)   // recursive call
+        RETURN partial + n
+    CATCH TypeError
+        RETURN "Error: n and m must be numbers"
+    END TRY
+END multiplicacion_recursiva
+5. division_entera_recursiva(dividendo, divisor)
+BEGIN division_entera_recursiva(dividendo, divisor)
+    TRY
+        IF divisor == 0 THEN
+            RETURN "Error: cannot divide by 0"
+        END IF
+        remainder = dividendo - divisor
+        IF remainder < 0 THEN
+            RETURN 0                            // base case
+        END IF
+        RETURN 1 + division_entera_recursiva(remainder, divisor)   // recursive case
+    CATCH TypeError
+        RETURN "Error: dividendo and divisor must be numbers"
+    END TRY
+END division_entera_recursiva
+6. potencia_recursiva(base, exponente)
+BEGIN potencia_recursiva(base, exponente)
+    TRY
+        IF exponente < 0 THEN
+            RETURN "Error: exponente cannot be negative"
+        ELSE IF exponente == 0 THEN
+            RETURN 1                            // base case
+        ELSE
+            RETURN base * potencia_recursiva(base, exponente - 1)   // recursive case
+        END IF
+    CATCH TypeError
+        RETURN "Error: base and exponente must be numbers"
+    END TRY
+END potencia_recursiva
+7. serie_collatz(n)
+BEGIN serie_collatz(n)
+    TRY
+        IF n <= 0 THEN
+            RETURN "Error: n must be a positive integer"
+        END IF
+        IF n == 1 THEN
+            PRINT "END!"
+            RETURN 0                            // base case
+        END IF
+        IF n is even THEN
+            next_value = n / 2
+        ELSE
+            next_value = 3 * n + 1
+        END IF
+        PRINT next_value
+        RETURN serie_collatz(next_value)        // recursive case
+    CATCH TypeError
+        RETURN "Error: n must be an integer"
+    END TRY
+END serie_collatz
+8. aplanar_json(diccionario, clave_padre, separador)
+BEGIN aplanar_json(diccionario, clave_padre = "", separador = ".")
+    TRY
+        pairs = empty dictionary
+        FOR EACH (key, value) IN diccionario DO
+            IF clave_padre is empty THEN
+                new_key = key
+            ELSE
+                new_key = clave_padre + separador + key
+            END IF
+            IF value is a dictionary THEN
+                sub_pairs = aplanar_json(value, new_key, separador)   // recursive call
+                MERGE sub_pairs INTO pairs
+            ELSE
+                pairs[new_key] = value          // base case: simple value
+            END IF
+        END FOR
+        RETURN pairs
+    CATCH AttributeError
+        RETURN "Error: a dictionary was expected"
+    END TRY
+END aplanar_json

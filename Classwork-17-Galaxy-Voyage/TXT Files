@@ -1,0 +1,74 @@
+#INPUT
+
+IMPORT pygame library
+config ← empty dictionary
+OPEN "config.txt" IN READ MODE AS file
+
+FOR EACH line IN file DO
+    line ← STRIP whitespace FROM line
+    parameter, value ← SPLIT line BY "="
+    IF "," IN value THEN
+        values_list ← SPLIT value BY ","
+        cleaned_values ← CONVERT EACH c IN values_list TO INTEGER AFTER STRIPPING whitespace
+        config[parameter] ← TUPLE(cleaned_values)
+    ELSE IF "." IN value THEN
+        config[parameter] ← CONVERT value TO FLOAT
+    ELSE
+        config[parameter] ← CONVERT value TO INTEGER
+    ENDIF
+ENDFOR
+
+#FUNCTIONS
+
+DEFINE FUNCTION calculate_x_positions(surface, vertical_lines, space)
+    x_positions ← empty list
+    width ← GET WIDTH OF surface
+    spacing ← space * width
+    central_line ← width / 2
+    offset ← -INTEGER(vertical_lines / 2)
+    FOR EACH _ IN RANGE(vertical_lines) DO
+        ADD (central_line + offset * spacing) TO x_positions
+        offset ← offset + 1
+    ENDFOR
+    RETURN x_positions
+END FUNCTION
+
+DEFINE FUNCTION draw_vertical_lines(surface, x_positions, color, width=2)
+    height ← GET HEIGHT OF surface
+    FOR EACH x IN x_positions DO
+        DRAW LINE ON surface WITH color FROM (x, 0) TO (x, height) WITH THICKNESS width
+    ENDFOR
+END FUNCTION
+
+#MAIN INITIALIZATION
+
+INITIALIZE pygame
+screen ← CREATE DISPLAY WINDOW WITH SIZE (config['width'], config['height'])
+x_positions ← CALL calculate_x_positions(
+    surface = screen,
+    vertical_lines = config['vertical_lines'],
+    space = config['space']
+)
+
+DISPLAY x_positions
+running ← TRUE
+
+#MAIN LOOP
+WHILE running = TRUE DO
+    FOR EACH event IN GET EVENTS FROM pygame DO
+        IF event.type IS EQUAL TO QUIT THEN
+            running ← FALSE
+        ENDIF
+    ENDFOR
+
+    FILL screen WITH config['bg_color']
+    CALL draw_vertical_lines(
+        surface = screen,
+        x_positions = x_positions,
+        color = config['line_color']
+    )
+
+    UPDATE DISPLAY
+ENDWHILE
+
+QUIT pygame
